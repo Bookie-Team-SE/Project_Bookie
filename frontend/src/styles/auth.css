@@ -1,0 +1,207 @@
+
+/* ==============================
+   GENERAL LAYOUT
+============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background: #f1f5ff;
+  font-family: Arial, sans-serif;
+}
+
+/* ==============================
+   REGISTER CARD
+============================== */
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 50px 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* ==============================
+   LOGO
+============================== */
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.logo img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==============================
+   TITLE
+============================== */
+
+.auth-card h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.auth-description {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #777777;
+}
+
+/* ==============================
+   ERROR MESSAGE
+============================== */
+
+.error {
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  background: #fff1f1;
+  border: 1px solid #ffd1d1;
+  border-radius: 7px;
+  color: #d93025;
+  font-size: 13px;
+}
+
+/* ==============================
+   FORM
+============================== */
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.form-group input {
+  width: 100%;
+  height: 41px;
+  padding: 0 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #333333;
+  font-size: 13px;
+  transition: 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: #888888;
+}
+
+.form-group input:focus {
+  border-color: #3157d5;
+  box-shadow: 0 0 0 3px rgba(49, 87, 213, 0.1);
+}
+
+/* ==============================
+   REGISTER BUTTON
+============================== */
+
+.auth-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 7px;
+  background: #3157d5;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: #2445b5;
+}
+
+.auth-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ==============================
+   LOGIN FOOTER
+============================== */
+
+.auth-footer {
+  margin-top: 19px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #777777;
+}
+
+.auth-footer a {
+  color: #204bd3;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   TABLET RESPONSIVE
+============================== */
+
+@media screen and (max-width: 600px) {
+  .auth-card {
+    max-width: 420px;
+    padding: 40px 28px;
+  }
+}
+
+/* ==============================
+   MOBILE RESPONSIVE
+============================== */
+
+@media screen and (max-width: 400px) {
+  .auth-container {
+    padding: 20px 14px;
+  }
+
+  .auth-card {
+    padding: 35px 22px;
+  }
+
+  .logo img {
+    width: 125px;
+  }
+
+  .auth-card h2 {
+    font-size: 22px;
+  }
+
+  .auth-description {
+    font-size: 13px;
+  }
+}
