@@ -69,6 +69,70 @@
 }
 
 /* ==============================
+   REGISTRATION SUCCESS
+============================== */
+
+.register-success {
+  text-align: center;
+}
+
+.register-success-icon {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #e8f7ee;
+  color: #21834a;
+}
+
+.register-success-icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+.register-success-eyebrow {
+  margin: 0 0 8px;
+  color: #21834a;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.register-success h2 {
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.register-success-description {
+  margin: 0 auto 20px;
+  color: #777777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.register-success-email {
+  padding: 12px;
+  border: 1px solid #e4ebf4;
+  border-radius: 8px;
+  background: #f7f9fc;
+  color: #777777;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.register-success-email strong {
+  color: #333333;
+}
+
+.register-success-button {
+  margin-top: 24px;
+}
+
+/* ==============================
    ERROR MESSAGE
 ============================== */
 
