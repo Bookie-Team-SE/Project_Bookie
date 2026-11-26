@@ -17,6 +17,7 @@ function Register() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -43,9 +44,7 @@ function Register() {
         password: formData.password,
       });
 
-      alert("Registration successful!");
-      navigate("/login");
-
+      setRegistered(true);
     } catch (err) {
       setError(
         err.response?.data?.message || "Registration failed!"
@@ -65,6 +64,38 @@ function Register() {
           <img src={bookie} alt="Bookie Logo" />
         </div>
 
+        {registered ? (
+          <div className="register-success" role="status" aria-live="polite">
+            <div className="register-success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="m6 12.5 4 4L18.5 8"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <p className="register-success-eyebrow">Account created</p>
+            <h2>Welcome to Bookie, {formData.username.trim()}!</h2>
+            <p className="register-success-description">
+              Your account is ready. Sign in to explore, borrow, and manage your
+              favorite books.
+            </p>
+            <p className="register-success-email">
+              Confirmation for <strong>{formData.email.trim()}</strong>
+            </p>
+            <button
+              type="button"
+              className="auth-button register-success-button"
+              onClick={() => navigate("/login")}
+            >
+              Continue to login
+            </button>
+          </div>
+        ) : (
+          <>
         {/* TITLE */}
         <h2>Create Account</h2>
 
@@ -152,6 +183,8 @@ function Register() {
           Already have an account?
           <Link to="/login"> Login</Link>
         </p>
+          </>
+        )}
 
       </div>
 

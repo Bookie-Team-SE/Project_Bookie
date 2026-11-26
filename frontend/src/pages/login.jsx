@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import bookie from "../assets/bookie.png";
 import "../styles/login.css";
 import libraryImage from "../assets/test.jpg";
 
 function Login() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,13 +26,26 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    console.log("Login Data:", {
-      ...formData,
-      rememberMe,
-    });
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/login",
+        formData
+      );
 
-    // Connect your login API here
+      localStorage.setItem("bookieToken", response.data.token);
+      if (rememberMe) {
+        localStorage.setItem("bookieUser", JSON.stringify(response.data.user));
+      }
+
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,6 +86,7 @@ function Login() {
 
           {/* Login Form */}
           <form onSubmit={handleSubmit}>
+            {error && <p className="error">{error}</p>}
 
             {/* Email */}
             <div className="form-group">
@@ -133,8 +151,8 @@ function Login() {
             </div>
 
             {/* Login Button */}
-            <button type="submit" className="login-button">
-              Log In
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
             </button>
 
           </form>
