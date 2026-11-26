@@ -36,11 +36,9 @@ function Login() {
       );
 
       localStorage.setItem("bookieToken", response.data.token);
-      if (rememberMe) {
-        localStorage.setItem("bookieUser", JSON.stringify(response.data.user));
-      }
+      localStorage.setItem("bookieUser", JSON.stringify(response.data.user));
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed!");
     } finally {
