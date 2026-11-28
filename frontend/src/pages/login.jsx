@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,12 +12,27 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+=======
+import { useState } from "react";
+import { BookOpen, LockKeyhole, Mail, Sparkles } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import api from "../services/api";
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+>>>>>>> origin/update_backend
 
+  const submit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setBusy(true);
+
+<<<<<<< HEAD
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,111 +59,94 @@ function Login() {
       setError(err.response?.data?.message || "Login failed!");
     } finally {
       setLoading(false);
+=======
+    try {
+      const { data } = await api.post("/users/login", form);
+      login(data);
+      navigate("/books", { replace: true });
+    } catch (err) {
+      setError(err.response?.data?.message || "Could not log in. Please try again.");
+    } finally {
+      setBusy(false);
+>>>>>>> origin/update_backend
     }
   };
 
   return (
-    <div className="login-container">
-
-      {/* LEFT SIDE - LOGIN FORM */}
-      <div className="login-left">
-        <div className="login-content">
-
-          {/* Logo */}
-          <div className="login-logo">
-            <img
-              src={bookie}
-              alt="Biblion Logo"
-              className="login-logo-image"
-            />
+    <main className="auth-page">
+      <section className="auth-shell">
+        <aside className="auth-art">
+          <div className="art-top">
+            <Link to="/login" className="mini-brand"><BookOpen size={22} /> bookie.</Link>
+            <span className="art-pill"><Sparkles size={14} /> YOUR NEXT CHAPTER</span>
           </div>
-
-          {/* Welcome Text */}
-          <div className="welcome-section">
-            <h1>Welcome Back, Grace</h1>
-            <p>
-              Welcome back to Biblion! Please enter your details
-            </p>
+          <div className="art-copy">
+            <span className="eyebrow">WELCOME TO BOOKIE</span>
+            <h1>Stories that<br /><em>stay with you.</em></h1>
+            <p className="art-description">A little space for big ideas, new worlds, and the books you love.</p>
           </div>
-
-          {/* Welcome Banner */}
-          <div className="login-welcome-banner">
-
-            <div className="welcome-message">
-              <h3>Your Library Awaits</h3>
-              <p>
-                Sign in to explore, borrow, and manage your
-                favorite books.
-              </p>
-            </div>
+          <div className="book-stack" aria-hidden="true">
+            <span className="sparkle sparkle-one">✦</span>
+            <span className="book book-one">Read<br />more</span>
+            <span className="book book-two">Find<br />wonder</span>
+            <span className="book book-three">Your<br />story</span>
+            <span className="sparkle sparkle-two">✦</span>
           </div>
+          <p className="art-footer">A good book makes room for possibility.</p>
+        </aside>
 
+<<<<<<< HEAD
           {/* Login Form */}
           <form onSubmit={handleSubmit}>
             {error && <p className="error">{error}</p>}
+=======
+        <div className="auth-panel">
+          <Link to="/login" className="mobile-brand"><BookOpen size={22} /> bookie.</Link>
+          <div className="auth-content">
+            <span className="section-kicker">YOUR BOOKSHELF IS WAITING</span>
+            <h2>Welcome <span>back.</span></h2>
+            <p className="muted">Sign in to pick up where your next great read begins.</p>
+>>>>>>> origin/update_backend
 
-            {/* Email */}
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            {error && <div className="alert error-alert" role="alert">{error}</div>}
 
-            {/* Password */}
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-
-              <div className="password-wrapper">
+            <form className="auth-form" onSubmit={submit}>
+              <label htmlFor="login-email">Email address</label>
+              <div className="input-wrap">
+                <Mail size={18} aria-hidden="true" />
                 <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  id="login-email"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={(event) => setForm({ ...form, email: event.target.value })}
+                  placeholder="you@example.com"
+                  autoComplete="email"
                   required
                 />
-
-                <button
-                  type="button"
-                  className="password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                >
-                  <i
-                    className={
-                      showPassword
-                        ? "fa-solid fa-eye"
-                        : "fa-solid fa-eye-slash"
-                    }
-                  ></i>
-                </button>
               </div>
-            </div>
 
-            {/* Remember Me / Forgot Password */}
-            <div className="login-options">
-              <label className="remember-option">
+              <label htmlFor="login-password">Password</label>
+              <div className="input-wrap">
+                <LockKeyhole size={18} aria-hidden="true" />
                 <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
+                  id="login-password"
+                  name="password"
+                  type="password"
+                  value={form.password}
+                  onChange={(event) => setForm({ ...form, password: event.target.value })}
+                  placeholder="Enter your password"
+                  autoComplete="current-password"
+                  required
                 />
-                <span>Remember for 30 days</span>
-              </label>
+              </div>
 
-              <Link to="/forgot-password">
-                Forgot password?
-              </Link>
-            </div>
+              <button className="primary-button" disabled={busy}>
+                {busy ? "Signing in..." : "Sign in"} <BookOpen size={17} />
+              </button>
+            </form>
 
+<<<<<<< HEAD
             {/* Login Button */}
             <button type="submit" className="login-button" disabled={loading}>
               {loading ? "Logging in..." : "Log In"}
@@ -161,22 +160,13 @@ function Login() {
               Don’t have an account?
               <Link to="/register"> Register for free</Link>
             </p>
+=======
+            <p className="auth-switch">New to Bookie? <Link to="/register">Create an account</Link></p>
+>>>>>>> origin/update_backend
           </div>
-
+          <p className="panel-foot">Made for people who love a good story.</p>
         </div>
-      </div>
-
-      {/* RIGHT SIDE - IMAGE */}
-      <div className="login-right">
-        <img
-          src={libraryImage}
-          alt="Books and library"
-          className="login-background"
-        />
-      </div>
-
-    </div>
+      </section>
+    </main>
   );
 }
-
-export default Login;
